@@ -1,0 +1,43 @@
+{
+  "name": "nandos-guest-checkout",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build-app": "npm install && npm run build",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve"
+  },
+  "dependencies": {
+    "@okta/okta-auth-js": "^6.2.0",
+    "@okta/okta-vue": "^5.2.0",
+    "axios": "^0.26.1",
+    "core-js": "^3.21.0",
+    "daisyui": "^2.6.4",
+    "semantic-ui-css": "Semantic-Org/Semantic-UI-CSS",
+    "text-encoding": "^0.7.0",
+    "vue": "^3.2.31",
+    "vue-axios": "^3.4.1",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "@vue/cli-plugin-babel": "~5.0.1",
+    "@vue/cli-plugin-eslint": "~5.0.1",
+    "@vue/cli-plugin-router": "~5.0.1",
+    "@vue/cli-plugin-unit-jest": "~5.0.1",
+    "@vue/cli-service": "~5.0.1",
+    "@vue/compiler-sfc": "^3.2.31",
+    "@vue/test-utils": "^2.0.0-rc.18",
+    "@vue/vue3-jest": "^27.0.0-alpha.4",
+    "autoprefixer": "^10.4.2",
+    "babel-jest": "27.x",
+    "eslint": "8.10.0",
+    "eslint-plugin-vue": "^8.4.1",
+    "nodemon": "^2.0.15",
+    "postcss": "^8.4.8",
+    "tailwindcss": "^3.0.23",
+    "vue-loader": "17.0.0"
+  }
+}

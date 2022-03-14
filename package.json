@@ -1,0 +1,28 @@
+{
+  "name": "nandos-guest-checkout",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "dev": "nodemon server.js",
+    "build-client": "mkdir -p public && cd client && npm run build-app && cd ..",
+    "lint": "vue-cli-service lint",
+    "start": "OKTA_CLIENT_ORGURL=https://dev-38486327.okta.com OKTA_OAUTH2_CLIENT_ID_SPA=nandos-id-web-apps-dev OKTA_AUTH_SERVER=/oauth2/aus1hdmcqq7XJ1sP35d7 node server.js"
+  },
+  "dependencies": {
+    "@okta/okta-auth-js": "^6.2.0",
+    "axios": "^0.26.0",
+    "body-parser": "^1.19.2",
+    "connect-history-api-fallback": "^1.6.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.10.8",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.1",
+    "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.21",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
