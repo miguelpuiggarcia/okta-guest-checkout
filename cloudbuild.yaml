@@ -1,0 +1,45 @@
+steps:
+  # Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    id: "Build Docker Image"
+    args:
+      [
+        "build",
+        "-t",
+        "${_DOCKER_ART_REG}/${_SERVICE_NAME}:${_BUILD_ENV}",
+        "-t",
+        "${_DOCKER_ART_REG}/${_SERVICE_NAME}:$COMMIT_SHA",
+        "${_SERVICE_PATH}",
+      ]
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    id: "Push container image"
+    args: ["push", "${_DOCKER_ART_REG}/${_SERVICE_NAME}:${_BUILD_ENV}"]
+
+  # Deploy container image as Cloud Run Service
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    id: "Deploy Cloud Run Image"
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        echo "Deploying Run Service..."
+        gcloud run deploy $_SERVICE_NAME \
+        --image=${_DOCKER_ART_REG}/${_SERVICE_NAME}:$_BUILD_ENV \
+        --region=$_LOCATION \
+        --timeout=30m \
+        --set-env-vars OKTA_TOKEN="$_OKTA_TOKEN",OKTA_GUEST_GROUP="$_OKTA_GUEST_GROUP",OKTA_GUEST_TYPE="$_OKTA_GUEST_TYPE",OKTA_URL="$_OKTA_URL" \
+        --allow-unauthenticated
+images:
+  - "${_DOCKER_ART_REG}/${_SERVICE_NAME}"
+substitutions:
+  _LOCATION: "europe-west4"
+  _OKTA_TOKEN: "$_OKTA_TOKEN"
+  _OKTA_GUEST_GROUP: "$_OKTA_GUEST_GROUP"
+  _OKTA_GUEST_TYPE: "$_OKTA_GUEST_TYPE"
+  _OKTA_URL: "$_OKTA_URL"
+  _DOCKER_ART_REG: "europe-west2-docker.pkg.dev/prod-nandos-id-1f3c2e0c/nandos-id-docker"
+  _SERVICE_NAME: "nandos-okta-guest-checkout"
+  _BUILD_ENV: "prod"
+  _SERVICE_PATH: "."
+timeout: 1200s

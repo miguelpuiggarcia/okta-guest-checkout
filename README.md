@@ -1,4 +1,9 @@
+# Local Build
 
-```
-OKTA_CLIENT_ORGURL=https://dev-38486327.okta.com OKTA_OAUTH2_CLIENT_ID_SPA=nandos-id-web-apps-dev OKTA_AUTH_SERVER=/oauth2/aus1hdmcqq7XJ1sP35d7 npm run serve
-```
+`docker build --no-cache . -t miguelpuig/guest-checkout`
+
+`docker run -p 9090:9090 -d --name guest-checkout miguelpuig/guest-checkout`
+
+App available on 
+
+[https://localhost:9090](https://localhost:9090)
