@@ -1,4 +1,4 @@
-# Local Build
+# Local Build 
 
 `docker build --no-cache . -t miguelpuig/guest-checkout`
 
