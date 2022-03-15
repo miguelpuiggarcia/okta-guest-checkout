@@ -10,7 +10,7 @@ const jwt_decode = require("jwt-decode");
 const router = express.Router();
 const app = express();
 const host = "http://localhost";
-const port = 9090;
+const port = 8080;
 
 // Middleware for serving '/dist' directory
 const staticFileMiddleware = express.static("public");
