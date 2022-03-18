@@ -207,7 +207,7 @@ export default {
     },
     async login() {
       await this.$auth.revokeAccessToken();
-      this.$auth.signInWithRedirect({ originalUri: "/" });
+      this.$auth.signInWithRedirect({ originalUri: "/", loginHint: this.guestEmail });
     },
     loginGuest(session) {
       this.$auth.signInWithRedirect({
