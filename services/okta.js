@@ -46,6 +46,7 @@ class Okta {
 
       // Check If GUEST exists
       const existingGuest = await this.findUser(emailGuest);
+
       if (existingGuest) {
         // Setting random password
         user = await this.updateUser(existingGuest.id, tmpPass, {
@@ -54,10 +55,12 @@ class Okta {
         guest.existingGuest = true;
       } else {
         // Create user on GUEST group with a tmp password
+
         user = await this.createUser(
           {
-            email: `${email}`,
+            guest_real_email: `${email}`,
             login: `${emailGuest}`,
+            email: `${emailGuest}`,
             profile_id: profileId,
             customer_type: "guest",
           },

@@ -10,7 +10,7 @@ const jwt_decode = require("jwt-decode");
 const router = express.Router();
 const app = express();
 const host = "http://localhost";
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // Middleware for serving '/dist' directory
 const staticFileMiddleware = express.static("public");
@@ -38,7 +38,7 @@ router.post("/guest/new", async function (req, res) {
     if (!_.get(req, "body.email")) {
       return res.status(400).json({ error: "Please send a valid email" });
     }
-    console.log("Creating guest");
+
     const guest = await oktaInstance.createGuestOption2(`${req.body.email}`);
 
     res.json({

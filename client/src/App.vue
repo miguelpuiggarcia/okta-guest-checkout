@@ -17,7 +17,7 @@
       </div>
       <div class="navbar-end">
         <a class="btn" v-if="authState?.isAuthenticated" v-on:click="logout()"
-          >Logout</a
+          >Logout {{ claims }}</a
         >
 
         <a class="btn" v-if="!authState?.isAuthenticated" v-on:click="login()"
@@ -35,7 +35,21 @@
 <script>
 export default {
   name: "app",
+  data: function () {
+    return {
+      claims: "",
+    };
+  },
+  mounted() {
+    this.setup();
+  },
   methods: {
+    async setup() {
+      console.log("as ", this.authState);
+      if (this.authState?.isAuthenticated) {
+        this.claims = await this.$auth.getUser();
+      }
+    },
     login() {
       this.$auth.signInWithRedirect({ originalUri: "/" });
     },

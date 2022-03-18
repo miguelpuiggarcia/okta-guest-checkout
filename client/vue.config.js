@@ -23,6 +23,8 @@ const env = {};
 });
 
 module.exports = {
+  publicPath: "/",
+  indexPath: "index.html",
   chainWebpack: (config) => {
     config.plugin("define").tap((args) => {
       const base = args[0]["process.env"];
@@ -34,5 +36,5 @@ module.exports = {
     });
   },
   runtimeCompiler: true,
-  outputDir: path.resolve(__dirname, "../public")
+  outputDir: path.resolve(__dirname, "../public"),
 };

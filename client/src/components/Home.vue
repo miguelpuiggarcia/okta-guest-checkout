@@ -47,7 +47,7 @@
             id="login-button"
             class="btn btn-link"
             role="button"
-            v-on:click="login()"
+            v-on:click="logout()"
           >
             Logout
           </button>
@@ -63,7 +63,7 @@
           >✕</label
         >
 
-        <div v-if="guestData.guest.existingGuest">
+        <div v-if="guestData.guest.existingRegisteredUser">
           <h3 class="text-lg font-bold text-center">Welcome back!</h3>
           <div class="w-full py-4 text-center">
             <div class="mb-5 mt-3">
@@ -89,8 +89,9 @@
             </p>
 
             <p>
-
-              <a v-on:click="loginGuest(guestData.guest.session)" href="javascript:void(0);"
+              <a
+                v-on:click="loginGuest(guestData.guest.session)"
+                href="javascript:void(0);"
                 >[Continue as guest]</a
               >
             </p>
@@ -166,6 +167,9 @@ export default {
         this.claims = await this.$auth.getUser();
       }
     },
+    async logout() {
+      await this.$auth.signOut();
+    },
     async access() {
       if (this.guestEmail === "") {
         alert("Please write an email");
@@ -186,10 +190,10 @@ export default {
         console.log("guestResponse: ", guestResponse.data);
         this.guestData = guestResponse.data;
         if (
-          !this.guestData.guest.existingGuest &&
+          !this.guestData.guest.existingRegisteredUser &&
           this.guestData.guest.session
         ) {
-          console.log("Redirecting you are not customer...");
+          console.log("Redirecting you are not guest...");
 
           this.loginGuest(this.guestData.guest.session);
         }
